@@ -19,7 +19,7 @@ public class Person : MonoBehaviour
         angryText.gameObject.SetActive(false);
 
         // Disable the happy text after 2 seconds without destroying it
-        Invoke(nameof(DisableHappyText), 2f);
+        Invoke(nameof(DisableHappyText), 5f);
     }
 
     // Method to make the person angry
@@ -33,7 +33,7 @@ public class Person : MonoBehaviour
         happyText.gameObject.SetActive(false);
 
         // Disable the angry text after 2 seconds without destroying it
-        Invoke(nameof(DisableAngryText), 2f);
+        Invoke(nameof(DisableAngryText), 5f);
     }
 
     // Method to disable happy text

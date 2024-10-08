@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 
 
 public class PersonRush : MonoBehaviour

@@ -53,11 +53,13 @@ public class DragFood : MonoBehaviour
             {
                 personScript.SetHappy();  // Make person happy if it's an apple
                 Destroy(gameObject);  // Destroy the apple immediately
+                GameManager.instance.AddMoney(10);
             }
             else if (gameObject.name == "Cake")
             {
                 personScript.SetAngry();  // Make person angry if it's a cake
                 Destroy(gameObject);  // Destroy the cake immediately
+                GameManager.instance.AddMoney(-5); //penalize player for making person angry? if not just remove this line
             }
         }
     }

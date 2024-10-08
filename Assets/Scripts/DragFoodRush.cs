@@ -3,7 +3,7 @@ using UnityEngine;
 public class DragFoodRush : MonoBehaviour
 {
     private PersonRush personRushScript;
-    private GameManager gameManagerRush;
+    private GameManagerRush gameManagerRush;
     private GameObject person;
     private Vector3 offset;
     private bool isDragging = false;
@@ -25,7 +25,7 @@ public class DragFoodRush : MonoBehaviour
             Debug.LogError("Person GameObject not found in the scene!");
         }
 
-        gameManagerRush = FindObjectOfType<GameManager>();
+        gameManagerRush = FindObjectOfType<GameManagerRush>();
 
         Debug.Log($"{gameObject.name} DragFoodRush script initialized.");
     }

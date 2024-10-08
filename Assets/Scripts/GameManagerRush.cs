@@ -2,39 +2,29 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 
-public class GameManager : MonoBehaviour
+public class GameManagerRush : MonoBehaviour
 {
-    //public TextMeshProUGUI timerText;
-   // public TextMeshProUGUI targetEmotionText;  // Single text object for dynamic target emotions
-    public TextMeshProUGUI moneyDisplayText;
-    //public PersonRush personRush;  // Reference to the PersonRush script
+    public TextMeshProUGUI timerText;
+   public TextMeshProUGUI targetEmotionText;  // Single text object for dynamic target emotions
+    public PersonRush personRush;  // Reference to the PersonRush script
 
     private float timer = 20f;
     private bool isGameActive = true;
     private string currentTargetEmotion;
-    public static GameManager instance;
+    
 
-    public int money;
-
-    void Awake()
-    {
-        instance = this;
-    }
     void Start()
     {
-        // Set text colors to red initially
-        //SetTextColorRed(timerText);
-        //SetTextColorRed(targetEmotionText);
+        //Set text colors to red initially
+        SetTextColorRed(timerText);
+        SetTextColorRed(targetEmotionText);
 
-        //start with money at 0
-        money = 0;
-
-        //StartNewRound("Satisfaction");
+        StartNewRound("Satisfaction");
     }
 
     void Update()
     {
-        /*
+        
         if (isGameActive)
         {
             timer -= Time.deltaTime;
@@ -50,14 +40,12 @@ public class GameManager : MonoBehaviour
     
              
         }
-        */
-        //update money text
-        moneyDisplayText.text = "Money: " + money.ToString();
+        
     }
 
 
     public void StartNewRound(string targetEmotion)
-    {/*
+    {
         timer = 20f;
         isGameActive = true;
         timerText.gameObject.SetActive(true);
@@ -66,7 +54,7 @@ public class GameManager : MonoBehaviour
         personRush.SetTargetEmotion(targetEmotion);
 
         UpdateTargetEmotionText(targetEmotion);
-        */
+        
     }
 
     public void ResetRound()
@@ -82,16 +70,7 @@ public class GameManager : MonoBehaviour
         // }
     }
 
-    public void AddMoney(int amount)
-    {
-        money += amount;
-        if (money < 0)
-        {
-            money = 0;
-        }
-    }
 
-/*
     private void UpdateTargetEmotionText(string targetEmotion)
     {
         
@@ -110,5 +89,5 @@ public class GameManager : MonoBehaviour
             Debug.LogError("TextMeshProUGUI component not assigned!");
         }
     }
-    */
+    
 }

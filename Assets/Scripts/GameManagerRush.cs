@@ -1,11 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManagerRush : MonoBehaviour
 {
-    public TextMeshProUGUI timerText;
-    public TextMeshProUGUI targetEmotionText;  // Single text object for dynamic target emotions
-    public PersonRush personRush;  // Reference to the PersonRush script
+    public Button timerButton;
+    public Button targetEmotionButton; // Single button for dynamic target emotions
+    public PersonRush personRush; // Reference to the PersonRush script
 
     private float timer = 20f;
     private bool isGameActive = true;
@@ -13,10 +14,10 @@ public class GameManagerRush : MonoBehaviour
 
     void Start()
     {
-        // Set text colors to red initially
-        SetTextColorRed(timerText);
-        SetTextColorRed(targetEmotionText);
-
+        // Set initial text and color for the timer button
+        SetButtonText(timerButton, "Timer: 20s");
+        SetButtonTextColorRed(timerButton);
+        
         StartNewRound("Satisfaction");
     }
 
@@ -24,16 +25,25 @@ public class GameManagerRush : MonoBehaviour
     {
         if (isGameActive)
         {
+            // Update the timer
             timer -= Time.deltaTime;
-            timerText.text = "Timer: " + Mathf.Ceil(timer).ToString();
 
-            if (timer <= 0)
+            if (timerButton != null && timerButton.gameObject.activeInHierarchy)
             {
-                isGameActive = false;
-                timer = 0;
-                Debug.Log("Time's up!");
-                // Handle end-game logic if necessary
+                // Update the button text with the remaining time
+                SetButtonText(timerButton, "Timer: " + Mathf.Ceil(timer).ToString() + "s");
+
+                if (timer <= 0)
+                {
+                    isGameActive = false;
+                    timer = 0;
+                    SetButtonText(timerButton, "Timer: 0s");
+                    Debug.Log("Time's up!");
+                    // Handle end-game logic if necessary
+                }
             }
+
+
         }
     }
 
@@ -41,42 +51,63 @@ public class GameManagerRush : MonoBehaviour
     {
         timer = 20f;
         isGameActive = true;
-        timerText.gameObject.SetActive(true);
+        SetButtonText(timerButton, "Timer: 20s");
+        timerButton.gameObject.SetActive(true);
 
         currentTargetEmotion = targetEmotion;
         personRush.SetTargetEmotion(targetEmotion);
 
-        UpdateTargetEmotionText(targetEmotion);
+        UpdateTargetEmotionButton(targetEmotion);
     }
 
     public void ResetRound()
     {
-        // if (currentTargetEmotion == "Satisfaction")
-        // {
-        //     StartNewRound("Disgust");
-        // }
-        // if (currentTargetEmotion == "Disgust")
-        // {
-        //     Debug.Log("You won!");
-        //     // Add additional logic if needed
-        // }
+        // Additional logic can be added here
     }
 
-    private void UpdateTargetEmotionText(string targetEmotion)
+    private void UpdateTargetEmotionButton(string targetEmotion)
     {
-        targetEmotionText.text = "Target emotion: " + targetEmotion;
-        targetEmotionText.gameObject.SetActive(true);
+        SetButtonText(targetEmotionButton, "Target emotion: " + targetEmotion);
+        targetEmotionButton.gameObject.SetActive(true);
     }
 
-    private void SetTextColorRed(TextMeshProUGUI textComponent)
+    private void SetButtonText(Button button, string text)
     {
-        if (textComponent != null)
+        if (button != null)
         {
-            textComponent.color = Color.red;
+            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null)
+            {
+                buttonText.text = text;
+            }
+            else
+            {
+                Debug.LogError("Button does not contain a TextMeshProUGUI component!");
+            }
         }
         else
         {
-            Debug.LogError("TextMeshProUGUI component not assigned!");
+            Debug.LogError("Button component not assigned!");
+        }
+    }
+
+    private void SetButtonTextColorRed(Button button)
+    {
+        if (button != null)
+        {
+            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null)
+            {
+                buttonText.color = Color.red;
+            }
+            else
+            {
+                Debug.LogError("Button does not contain a TextMeshProUGUI component!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Button component not assigned!");
         }
     }
 }

@@ -1,25 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    //just for testing food stuff
-    // public FoodSO testFood;
-    // private GameObject test;
+    public static GameManager instance; 
+    public TextMeshProUGUI moneyText;   
+    private int money = 0;           
 
-    // void Start()
-    // {
-    //     test = instantiateFood(testFood, new Vector3(0, 1, -8.5f));
-    // }
+    void Awake()
+    {
+        // Singleton pattern to ensure only one instance of GameManager exists
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Optional: keeps GameManager alive across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
-    // public GameObject instantiateFood(FoodSO food, Vector3 pos)
-    // {
-    //     if (food.foodModel != null)
-    //     {
-    //         GameObject foodInstance = Instantiate(food.foodModel, pos, Quaternion.identity);
-    //         return foodInstance;
-    //     }
-    //     else return null;
-    // }
+    void Start()
+    {
+        // Initialize the money text display
+        UpdateMoneyText();
+    }
+
+    // Method to increment money
+    public void AddMoney(int amount)
+    {
+        money += amount;
+        UpdateMoneyText();
+    }
+
+    // Method to update the money text display
+    private void UpdateMoneyText()
+    {
+        if (moneyText != null)
+        {
+            moneyText.text = money.ToString(); // Display the numeric value
+        }
+    }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DragFood : MonoBehaviour
 {
-    public GameObject person;  // Reference to the person object
+    public GameObject person;          // Reference to the person object
     private Person personScript;
     private Vector3 offset;
     private bool isDragging = false;
@@ -48,15 +48,18 @@ public class DragFood : MonoBehaviour
         // Check if the object collided with the person
         if (other.gameObject == person)
         {
-            // Check what object is being dragged
-            if (gameObject.name == "Apple")
+            // Check if the object name contains "Apple"
+            if (gameObject.name.Contains("Apple"))
             {
                 personScript.SetHappy();  // Make person happy if it's an apple
+                GameManager.instance.AddMoney(1); // Increase money by 1 using GameManager
                 Destroy(gameObject);  // Destroy the apple immediately
             }
-            else if (gameObject.name == "Cake")
+            // Check if the object name contains "Cake"
+            else if (gameObject.name.Contains("Cake"))
             {
                 personScript.SetAngry();  // Make person angry if it's a cake
+                GameManager.instance.AddMoney(-1); // Decrease money by 1 using GameManager
                 Destroy(gameObject);  // Destroy the cake immediately
             }
         }

@@ -27,8 +27,13 @@ public class GameManagerRush : MonoBehaviour
         
         if (isGameActive)
         {
+            // Update the timer
             timer -= Time.deltaTime;
-            timerText.text = "Timer: " + Mathf.Ceil(timer).ToString();
+
+            if (timerButton != null && timerButton.gameObject.activeInHierarchy)
+            {
+                // Update the button text with the remaining time
+                SetButtonText(timerButton, "Timer: " + Mathf.Ceil(timer).ToString() + "s");
 
             if (timer <= 0)
             {
@@ -48,7 +53,8 @@ public class GameManagerRush : MonoBehaviour
     {
         timer = 20f;
         isGameActive = true;
-        timerText.gameObject.SetActive(true);
+        SetButtonText(timerButton, "Timer: 20s");
+        timerButton.gameObject.SetActive(true);
 
         currentTargetEmotion = targetEmotion;
         personRush.SetTargetEmotion(targetEmotion);
@@ -78,15 +84,23 @@ public class GameManagerRush : MonoBehaviour
         targetEmotionText.gameObject.SetActive(true);
     }
 
-    private void SetTextColorRed(TextMeshProUGUI textComponent)
+    private void SetButtonTextColorRed(Button button)
     {
-        if (textComponent != null)
+        if (button != null)
         {
-            textComponent.color = Color.red;
+            TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            if (buttonText != null)
+            {
+                buttonText.color = Color.red;
+            }
+            else
+            {
+                Debug.LogError("Button does not contain a TextMeshProUGUI component!");
+            }
         }
         else
         {
-            Debug.LogError("TextMeshProUGUI component not assigned!");
+            Debug.LogError("Button component not assigned!");
         }
     }
     

@@ -1,14 +1,15 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI; // Required for Button component
 using System.Collections.Generic;
 
 
 public class PersonRush : MonoBehaviour
 {
-    public TextMeshProUGUI satisfactionText;
-    public TextMeshProUGUI disgustText;
-    public TextMeshProUGUI congratulationsText; // Reference to the "Congratulations" text
-    public TextMeshProUGUI timerText; // Reference to the timer text
+    public Button satisfactionButton;
+
+    public Button congratulationsButton; // Reference to the "Congratulations" button
+    public Button timerButton; // Reference to the timer button
 
     private string currentEmotion = "None";
     private string targetEmotion = "None";
@@ -20,17 +21,17 @@ public class PersonRush : MonoBehaviour
         switch (emotion)
         {
             case "Satisfaction":
-                satisfactionText.gameObject.SetActive(true);
-                if (timerText != null)
+                satisfactionButton.gameObject.SetActive(true);
+                Debug.Log("setting emotion");
+                if (timerButton != null)
                 {
-                    Destroy(timerText.gameObject); // Destroy the timer text when satisfaction is reached
+                    
+                    Destroy(timerButton.gameObject); // Destroy the timer button when satisfaction is reached
+                    Debug.Log("destroy timer");
                 }
-                Invoke(nameof(DestroySatisfactionText), 2f); // Destroy satisfaction text after 2 seconds
+                Invoke(nameof(DestroySatisfactionButton), 2f); // Destroy satisfaction button after 2 seconds
                 break;
-            case "Disgust":
-                disgustText.gameObject.SetActive(true);
-                Invoke(nameof(DestroyDisgustText), 2f); // Destroy disgust text after 2 seconds
-                break;
+
         }
     }
 
@@ -64,19 +65,18 @@ public class PersonRush : MonoBehaviour
         return appleCount == 2 && cakeCount == 2;
     }
 
-    private void DestroySatisfactionText()
+    private void DestroySatisfactionButton()
     {
-        satisfactionText.gameObject.SetActive(false);
-        ShowCongratulations(); // Display the congratulations text after satisfaction text is destroyed
+        satisfactionButton.gameObject.SetActive(false);
+        Debug.Log("set to false");
+        ShowCongratulations(); // Display the congratulations button after satisfaction button is destroyed
     }
 
     private void ShowCongratulations()
     {
-        congratulationsText.gameObject.SetActive(true); // Show the "Congratulations" text
+        congratulationsButton.gameObject.SetActive(true); // Show the "Congratulations" button
+        Debug.Log("set congrats");
     }
 
-    private void DestroyDisgustText()
-    {
-        disgustText.gameObject.SetActive(false);
-    }
+
 }

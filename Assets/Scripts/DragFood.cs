@@ -54,6 +54,7 @@ public class DragFood : MonoBehaviour
                 personScript.SetHappy();  // Make person happy if it's an apple
                 GameManager.instance.AddMoney(1); // Increase money by 1 using GameManager
                 Destroy(gameObject);  // Destroy the apple immediately
+                GameManagerNormal.instance.AddMoney(10);
             }
             // Check if the object name contains "Cake"
             else if (gameObject.name.Contains("Cake"))
@@ -61,6 +62,7 @@ public class DragFood : MonoBehaviour
                 personScript.SetAngry();  // Make person angry if it's a cake
                 GameManager.instance.AddMoney(-1); // Decrease money by 1 using GameManager
                 Destroy(gameObject);  // Destroy the cake immediately
+                GameManagerNormal.instance.AddMoney(-5); //penalize player for making person angry? if not just remove this line
             }
         }
     }

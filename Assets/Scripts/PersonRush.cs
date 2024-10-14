@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI; // Required for Button component
 using System.Collections.Generic;
 
+
 public class PersonRush : MonoBehaviour
 {
     public Button satisfactionButton;

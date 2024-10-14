@@ -5,37 +5,27 @@ using UnityEngine.UI;
 public class SceneController : MonoBehaviour
 {
     public Button normalButton;  // Reference to the Normal button
-    public Button rushButton;    // Reference to the Rush button
-    public Button returnButton; 
+    public Button upgradeButton; // Reference to the Upgrade button
 
     void Start()
     {
-        // Add listeners to the buttons (if they exist in the current scene)
+        // Add listeners to the buttons
         if (normalButton != null)
             normalButton.onClick.AddListener(OpenNormalScene);
         
-        if (rushButton != null)
-            rushButton.onClick.AddListener(OpenRushScene);
-        
-        if (returnButton != null)
-            returnButton.onClick.AddListener(ReturnToIntro);
+        if (upgradeButton != null)
+            upgradeButton.onClick.AddListener(OpenUpgradeScene);
     }
 
     // Method to load the Normal game scene
     void OpenNormalScene()
     {
-        SceneManager.LoadScene("Game"); 
+        SceneManager.LoadScene("Game");  // Load the Game scene
     }
 
-    // Method to load the Rush game scene
-    void OpenRushScene()
+    // Method to load the Upgrade scene
+    void OpenUpgradeScene()
     {
-        SceneManager.LoadScene("Rush"); 
-    }
-
-    // Method to return to the Intro scene
-    public void ReturnToIntro()
-    {
-        SceneManager.LoadScene("Intro"); 
+        SceneManager.LoadScene("Upgrade"); 
     }
 }

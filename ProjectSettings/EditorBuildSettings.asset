@@ -14,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Rush.unity
     guid: 97882d1e4b5c567419a45717eff9698d
+  - enabled: 1
+    path: Assets/Scenes/Level1/CoffeeMatcha.unity
+    guid: ed65ada5b7f345546a484423ed7a6076
+  - enabled: 1
+    path: Assets/Scenes/Level1/CoffeeWithSugar.unity
+    guid: 4f6fe82ecb6e37545ae4bb5074379f34
+  - enabled: 1
+    path: Assets/Scenes/Level1/CoffeeWithCream.unity
+    guid: 80ad98cb242669644a872a312dc396f3
+  - enabled: 1
+    path: Assets/Scenes/Upgrade.unity
+    guid: f523c17164f9c4e40822cfbad92ec97d
   m_configObjects: {}
